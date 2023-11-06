@@ -1,5 +1,4 @@
-import { Button } from '@nextui-org/react';
-import React from 'react';
+
 import { Outlet } from 'react-router-dom';
 import NavMenu from '../components/header/NavMenu';
 import Footer from '../components/Footer/Footer';

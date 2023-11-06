@@ -83,7 +83,7 @@ const NavMenu = () => {
       <NavbarContent justify="end">
         <NavbarItem className="">
          <Link to='/login'>
-         <Button color="primary" variant="ghost" >Login</Button>
+         <Button color="primary" variant="ghost" className="font-bold" >Login</Button>
          </Link>
         </NavbarItem>
       </NavbarContent>
