@@ -50,7 +50,11 @@ const NavMenu = () => {
         All Jobs
       </NavLink>
 
-      <NavLink
+      {
+        user?.email
+        &&
+         <>
+         <NavLink
         to="/applied-jobs"
         className={({ isActive }) =>
           isActive ? "text-blue-600 fontt-bold" : ""
@@ -74,6 +78,8 @@ const NavMenu = () => {
       >
         My Jobs
       </NavLink>
+         </>
+      }
     </>
   );
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -94,7 +100,7 @@ const NavMenu = () => {
         <Logo />
       </NavbarBrand>
 
-      <NavbarContent className="hidden text-lg sm:flex gap-4" justify="center">
+      <NavbarContent className="hidden text-lg font-semibold sm:flex gap-4" justify="center">
         {navlinks}
       </NavbarContent>
       {user?.email ? (
