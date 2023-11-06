@@ -2,8 +2,39 @@ import { Button } from "@nextui-org/react";
 import { FcGoogle } from "react-icons/fc";
 import bg from "../../assets/images/pexels-jakub-novacek-924824.jpg";
 import '../../aos/aosSetup.js'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import UseAuth from "../../hooks/UseAuth.jsx";
+import toast from "react-hot-toast";
 const Login = () => {
+  const navigate = useNavigate()
+  const {logIn,googleLogin} = UseAuth()
+  const handleGoogleLogin = () => {
+    googleLogin()
+    .then(res => {
+      console.log(res);
+      toast.success('Account Logged In successfuly')
+      navigate('/')
+    })
+    .catch(err => console.log(err))
+  }
+  const handleSubmit = e => {
+    e.preventDefault()
+    const form = e.target
+    const email = form.email.value
+    const password = form.password.value
+    
+    logIn(email, password)
+    .then(res => {
+      console.log(res);
+      toast.success('Account Logged In successfuly')
+      navigate('/')
+    })
+    .catch(err => {
+      console.error(err)
+      toast.error("Invalid Email or Password")
+    })
+
+  }
   return (
     <>
       {/* This is an example component */}
@@ -21,7 +52,7 @@ const Login = () => {
         <div className=" container mx-auto h-full flex flex-1 justify-center items-center">
           <div className="w-full max-w-lg">
             <div className="leading-loose">
-              <form className="max-w-sm m-4 mx-auto  p-10 bg-white bg-opacity-25 rounded shadow-xl " data-aos="zoom-in">
+              <form onSubmit={handleSubmit} className="max-w-sm m-4 mx-auto  p-10 bg-white bg-opacity-25 rounded shadow-xl " data-aos="zoom-in">
                 <p className="text-white  text-center text-lg font-bold">
                   LOGIN
                 </p>
@@ -33,9 +64,10 @@ const Login = () => {
                     className="w-full px-5 py-1 text-gray-700 bg-gray-300 rounded focus:outline-none focus:bg-white"
                     type="email"
                     id="email"
+                    name="email"
                     placeholder="Write your email"
                     aria-label="email"
-                    required=""
+                    required
                   />
                 </div>
                 <div className="mt-2">
@@ -44,17 +76,20 @@ const Login = () => {
                     className="w-full px-5 py-1 text-gray-700 bg-gray-300 rounded focus:outline-none focus:bg-white"
                     type="password"
                     id="password"
+                    name="password"
                     placeholder="Write your password"
-                    arial-label="password"
-                    required=""
+                    
+                    required
                   />
                 </div>
                 <div className="mt-4 items-center ">
-                  <input
+                  <button
                     className="px-4 w-full py-1 text-white font-light tracking-wider bg-gray-900 hover:bg-gray-800 rounded"
                     type="submit"
-                    value="Login"
-                  />
+                  
+                  >
+                  Login
+                  </button>
 
                   <div className="flex items-center justify-center gap-3 mt-3">
                     <p>Dont have an account?</p>
@@ -67,7 +102,7 @@ const Login = () => {
                   </div>
                 </div>
                 <div className="text-center">
-                  <Button className="mt-4">
+                  <Button onClick={handleGoogleLogin} className="mt-4 cursor-pointer">
                     <FcGoogle /> Sign in with Google
                   </Button>
                 </div>
