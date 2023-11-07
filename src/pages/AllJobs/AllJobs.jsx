@@ -8,18 +8,20 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Hero from "../../components/Hero/Hero";
 import AllJobCard from "../../components/AllJobCard/AllJobCard";
+import Loading from "../../components/Loading/Loading";
 
 const AllJobs = () => {
   const [jobs, setJobs] = useState([]);
   const axiosSecure = useAxiosSecure();
   const [search, setSearch] = useState('')
-
+  const [loading, setLoading] = useState(true)
   // const {data, isLoading} = useQuery({
   //   queryKey: ['jobs'],
   //   queryFn: async () => {
   //     const data =  await fetch('http://localhost:5001/jobs')
   //     return await data.json()
   //   }
+    
   // })
   
   const handleSubmit = e => {
@@ -33,10 +35,14 @@ const AllJobs = () => {
 
   useEffect(() => {
     axiosSecure("/jobs").then((res) => {
+
       setJobs(res.data);
       console.log("rendering");
+      setLoading(false)
     });
   }, []);
+  
+
 
   return (
     <div>
@@ -50,12 +56,17 @@ const AllJobs = () => {
           <Button  type="submit" color="primary" size="lg" radius="none" className="">Search <BsSearch></BsSearch></Button>
       </form>
       </div>
-      
+      {
+        loading?
+        <Loading></Loading>
+        :
       <div className="grid grid-cols-1 gap-6">
-        {jobs?.filter(job => job.job_title.toLowerCase().includes(search.toLowerCase(search))).map((job) => (
+        {jobs?.filter(job => job.job_title.toLowerCase().includes(search.toLowerCase(search))).map((job) => 
           <AllJobCard key={job._id} job={job} />
-        ))}
+        )}
       </div>
+
+      }
       
     </div>
     </div>

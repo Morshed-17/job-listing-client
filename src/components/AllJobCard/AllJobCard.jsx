@@ -15,7 +15,9 @@ const AllJobCard = ({job}) => {
         deadline,
         applicants_number,
       } = job || {};
+      
       return (
+        
         <div className="w-full">
           <div className=" shadow-sm shadow-gray-100 max-w-full flex flex-col sm:flex-row gap-3 sm:items-center  justify-between px-5 py-4 rounded-md">
             <div className="grid md:grid-cols-3 lg:grid-cols-7 w-full gap-3">

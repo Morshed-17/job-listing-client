@@ -6,16 +6,18 @@ import JobListingCard from "./JobListingCard";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "@nextui-org/react";
+import Loading from "../../../components/Loading/Loading";
 
 const CategoryTab = () => {
-
+  const [loading, setLoading] = useState(true)
   const [jobs, setJobs] = useState([]);
-  useEffect(() =>{
+  useEffect(() => {
     axios.get("http://localhost:5001/jobs").then((res) => {
-    setJobs(res.data);
-    console.log('rendering');
-  });
-  } , [])
+      setJobs(res.data);
+      console.log("rendering");
+      setLoading(false)
+    });
+  }, []);
 
   return (
     <div className="max-w-screen-2xl mx-auto px-5 my-12">
@@ -32,38 +34,55 @@ const CategoryTab = () => {
             </TabList>
 
             <TabPanel>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {
+                loading?
+                <Loading/>
+                :
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {jobs?.slice(0, 4).map((job) => (
                   <JobListingCard key={job._id} job={job}></JobListingCard>
                 ))}
               </div>
+              }
             </TabPanel>
             <TabPanel>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {
-              jobs?.filter(job => job.job_category === 'Remote').slice(0,4).map(job => <JobListingCard key={job._id} job={job}></JobListingCard>)
-              }
+                {jobs
+                  ?.filter((job) => job.job_category === "Remote")
+                  .slice(0, 4)
+                  .map((job) => (
+                    <JobListingCard key={job._id} job={job}></JobListingCard>
+                  ))}
               </div>
             </TabPanel>
             <TabPanel>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {
-              jobs?.filter(job => job.job_category === 'On-site').slice(0,4).map(job => <JobListingCard key={job._id} job={job}></JobListingCard>)
-              }
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {jobs
+                  ?.filter((job) => job.job_category === "On-site")
+                  .slice(0, 4)
+                  .map((job) => (
+                    <JobListingCard key={job._id} job={job}></JobListingCard>
+                  ))}
               </div>
             </TabPanel>
             <TabPanel>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {
-              jobs?.filter(job => job.job_category === 'Hybrid').slice(0,4).map(job => <JobListingCard key={job._id} job={job}></JobListingCard>)
-              }
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {jobs
+                  ?.filter((job) => job.job_category === "Hybrid")
+                  .slice(0, 4)
+                  .map((job) => (
+                    <JobListingCard key={job._id} job={job}></JobListingCard>
+                  ))}
               </div>
             </TabPanel>
             <TabPanel>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {
-              jobs?.filter(job => job.job_category === 'Part-time').slice(0,4).map(job => <JobListingCard key={job._id} job={job}></JobListingCard>)
-              }
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {jobs
+                  ?.filter((job) => job.job_category === "Part-time")
+                  .slice(0, 4)
+                  .map((job) => (
+                    <JobListingCard key={job._id} job={job}></JobListingCard>
+                  ))}
               </div>
             </TabPanel>
           </Tabs>

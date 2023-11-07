@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import Hero from "../Hero/Hero";
 
 const JobDetails = () => {
   const [job, setJob] = useState({});
@@ -28,15 +29,11 @@ const JobDetails = () => {
   return (
     <div className="max-w-screen-2xl mx-auto px-5">
       <div>
-        <div
-            style={{
-                backgroundImage: `url(${job_banner})`
-            }}
-         className="py-32 text-center ">
-          <div>
-            <h3  className="text-4xl font-bold bg-slate-900 w-fit mx-auto rounded-lg p-4">Job Details</h3>
-          </div>
-        </div>
+        <Hero>
+          <div className="flex justify-center gap-6 items-center text-left">
+          <img className="h-16 w-16" src={job_banner} alt="" />
+          {job_title}</div>
+        </Hero>
         <div>
           <div className="">
             <div className="grid grid-cols-12 gap-6 my-32">
