@@ -30,6 +30,7 @@ const AddJob = () => {
       post_date: format(new Date(), "yyyy-MM-dd"),
       deadline: formattedStartDate,
       applicants_number: form.applicants.value,
+      email: user.email
     };
 
     axiosSecure.post('/jobs', job)

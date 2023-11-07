@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "@nextui-org/react";
 import Loading from "../../../components/Loading/Loading";
+import { Link } from "react-router-dom";
 
 const CategoryTab = () => {
   const [loading, setLoading] = useState(true)
@@ -87,9 +88,11 @@ const CategoryTab = () => {
             </TabPanel>
           </Tabs>
         </div>
+        <Link to="/all-jobs">
         <Button color="primary" className="text-lg block mx-auto ">
           Browse All
         </Button>
+        </Link>
       </div>
     </div>
   );
