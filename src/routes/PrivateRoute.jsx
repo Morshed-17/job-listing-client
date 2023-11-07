@@ -9,7 +9,7 @@ const PrivateRoute = ({children}) => {
     if(loading){
         return <div className="h-[60vh] flex items-center justify-center">
         <h2 className="text-xl font-bold mr-3">Loading</h2>
-            <ClipLoader
+        <ClipLoader
 
         color={'#ffffff'}
         loading={loading}

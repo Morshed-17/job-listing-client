@@ -1,5 +1,8 @@
 import axios from "axios";
+import { useContext } from "react";
 
+import { useNavigate } from "react-router-dom";
+import UseAuth from "./UseAuth";
 
 
 const axiosSecure = axios.create({
@@ -8,15 +11,22 @@ const axiosSecure = axios.create({
 })
 
 const useAxiosSecure = () => {
-    // const {logOut} = useContext(AuthContext)
-    // const navigate = useNavigate()
-    // axiosSecure.interceptors.response.use(res => {
-    //     return res;
+    const {logOut} = UseAuth()
+    const navigate = useNavigate()
+    axiosSecure.interceptors.response.use(res => {
+        return res;
 
-    // }, error => {
-    //     console.log('interceptor error', error.response);
-        
-    // })
+    }, error => {
+        console.log('interceptor error', error.response);
+        if(error.response.status === 401 || error.response.status === 403){
+            console.log('logout the user');
+            logOut()
+            .then(() => {
+                navigate('/login')
+            })
+            .catch(error => console.log(error))
+        }
+    })
     return axiosSecure
 };
 

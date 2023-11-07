@@ -3,17 +3,19 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import JobListingCard from "./JobListingCard";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "@nextui-org/react";
 
 const CategoryTab = () => {
 
   const [jobs, setJobs] = useState([]);
-  axios.get("http://localhost:5001/jobs").then((res) => {
+  useEffect(() =>{
+    axios.get("http://localhost:5001/jobs").then((res) => {
     setJobs(res.data);
-    
+    console.log('rendering');
   });
+  } , [])
 
   return (
     <div className="max-w-screen-2xl mx-auto px-5 my-12">

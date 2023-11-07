@@ -5,12 +5,12 @@ import { Toaster } from "react-hot-toast";
 
 const Main = () => {
   return (
-    <div className="dark bg-[#050819] text-foreground">
+    <div className="dark bg-[#050819] min-h-screen text-foreground">
       <NavMenu />
       <div>
         <Outlet />
       </div>
-      <Footer />
+      <Footer/>
       <Toaster position="bottom-right" reverseOrder={false} />
     </div>
   );
