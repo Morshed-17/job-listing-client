@@ -43,6 +43,10 @@ const MainRouter = createBrowserRouter([
       {
         path: '/my-jobs',
         element: <PrivateRoute><MyJobs/></PrivateRoute>
+      },
+      {
+        path: '/update-user',
+        element: 
       }
     ],
   },

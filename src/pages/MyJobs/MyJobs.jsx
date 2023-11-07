@@ -1,19 +1,44 @@
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Hero from "../../components/Hero/Hero";
-import { Button } from "@nextui-org/react";
+
 import Loading from "../../components/Loading/Loading";
 
-import { BsSearch } from "react-icons/bs";
 import MyJobCard from "../../components/MyJobCard/MyJobCard";
 import UseAuth from "../../hooks/UseAuth";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const MyJobs = () => {
   const [jobs, setJobs] = useState([]);
   const axiosSecure = useAxiosSecure();
   const { user } = UseAuth();
   const [loading, setLoading] = useState(true);
-  
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .delete(`/jobs/${id}`)
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              toast.success("Product deleted");
+            }
+          });
+      }
+    });
+  };
+  const handleUpdate = (id) => {};
+
   useEffect(() => {
     axiosSecure(`/my-jobs?email=${user.email}`).then((res) => {
       setJobs(res.data);
@@ -32,7 +57,7 @@ const MyJobs = () => {
         ) : (
           <div className="grid grid-cols-1 gap-6">
             {jobs?.map((job) => (
-              <MyJobCard key={job._id} job={job} />
+              <MyJobCard key={job._id} job={job} handleDelete={handleDelete}  />
             ))}
           </div>
         )}

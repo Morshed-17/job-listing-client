@@ -3,7 +3,7 @@ import { BsCalendar, BsCalendar2, BsPen, BsTrash2 } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 
-const MyJobCard = ({job}) => {
+const MyJobCard = ({job, handleDelete}) => {
     const {
         _id,
         job_banner,
@@ -15,6 +15,7 @@ const MyJobCard = ({job}) => {
         deadline,
         applicants_number,
       } = job || {};
+      
       
       
       return (
@@ -44,8 +45,10 @@ const MyJobCard = ({job}) => {
                   {deadline}
                 </span>
                 <div className="flex gap-3">
-                <Button color="danger">Delete <BsTrash2/></Button>
-                <Button color="primary">Update <BsPen/></Button>
+                <Button onClick={() => handleDelete(_id)} color="danger">Delete <BsTrash2/></Button>
+                <Link to="/update-job">
+                <Button  color="primary">Update <BsPen/></Button>
+                </Link>
                 </div>
             </div>
             
