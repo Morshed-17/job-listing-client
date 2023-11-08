@@ -13,6 +13,7 @@ const AllJobCard = ({job}) => {
         salary_range,
         job_description,
         deadline,
+        post_date,
         applicants_number,
       } = job || {};
       
@@ -20,7 +21,7 @@ const AllJobCard = ({job}) => {
         
         <div className="w-full">
           <div className=" shadow-sm shadow-gray-100 max-w-full flex flex-col sm:flex-row gap-3 sm:items-center  justify-between px-5 py-4 rounded-md">
-            <div className="grid md:grid-cols-3 lg:grid-cols-7 w-full gap-3">
+            <div className="grid md:grid-cols-3 lg:grid-cols-8  w-full gap-3">
               <span className="text-purple-600 text-sm">{author_name}</span>
               <h3 className="font-bold mt-px">
                 {job_title}
@@ -39,7 +40,10 @@ const AllJobCard = ({job}) => {
               </div>
               <span className="text-slate-200 text-sm flex gap-1 items-center">
                   <BsCalendar2/>
-                  
+                  {post_date? post_date : 'Toady'}
+                </span>
+              <span className="text-slate-200 text-sm flex gap-1 items-center">
+                  <BsCalendar2/>
                   {deadline}
                 </span>
                 <div>
