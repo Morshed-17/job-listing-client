@@ -80,7 +80,16 @@ const NavMenu = () => {
       </NavLink>
          </>
       }
+      <NavLink
+        to="/blog"
+        className={({ isActive }) =>
+          isActive ? "text-blue-600 fontt-bold" : ""
+        }
+      >
+        Blog
+      </NavLink>
     </>
+    
   );
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   return (
