@@ -2,18 +2,28 @@ import { Button } from "@nextui-org/react";
 import { FcGoogle } from "react-icons/fc";
 import bg from "../../assets/images/pexels-jakub-novacek-924824.jpg";
 import '../../aos/aosSetup.js'
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import UseAuth from "../../hooks/UseAuth.jsx";
 import toast from "react-hot-toast";
+import { useEffect, useRef, } from "react";
 const Login = () => {
   const navigate = useNavigate()
   const {logIn,googleLogin} = UseAuth()
+  const {state} = useLocation()
+  const toastShownRef = useRef(false);
+  useEffect(() => {
+    if (!toastShownRef.current) {
+      toast.error('You must login to visit this page');
+      toastShownRef.current = true;
+    }
+  }, []);
+  
   const handleGoogleLogin = () => {
     googleLogin()
     .then(res => {
       console.log(res);
       toast.success('Account Logged In successfuly')
-      navigate('/')
+      navigate(state)
     })
     .catch(err => console.log(err))
   }
@@ -27,7 +37,7 @@ const Login = () => {
     .then(res => {
       console.log(res);
       toast.success('Account Logged In successfuly')
-      navigate('/')
+      navigate(state)
     })
     .catch(err => {
       console.error(err)
