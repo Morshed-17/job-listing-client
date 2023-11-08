@@ -5,16 +5,18 @@ import { Link, useParams } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Hero from "../Hero/Hero";
+import Swal from "sweetalert2";
+
+import UseAuth from "../../hooks/UseAuth";
+import toast from "react-hot-toast";
 
 const JobDetails = () => {
   const [job, setJob] = useState({});
   const axiosSecure = useAxiosSecure();
   const param = useParams();
+  const { user } = UseAuth();
 
-  
-  axiosSecure
-    .get(`/job/${param.id}`)
-    .then((res) => setJob(res.data));
+  axiosSecure.get(`/job/${param.id}`).then((res) => setJob(res.data));
   const {
     _id,
     job_banner,
@@ -25,19 +27,53 @@ const JobDetails = () => {
     job_description,
     deadline,
     applicants_number,
+    email,
   } = job || {};
+
+  const handleApply = () => {
+    Swal.fire({
+      title: "Enter a URL",
+      input: "url",
+      inputPlaceholder: "Enter URL",
+      showCancelButton: true,
+      inputValidator: (value) => {
+        if (!value) {
+          return "URL is required!";
+        }
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const application = {
+          user: user.uid,
+          name: user.displayName,
+          email: user.email,
+          job: job,
+          resume: result.value,
+        };
+        axiosSecure
+          .post(`/applied`, application)
+          .then((res) => console.log(res.data));
+
+        axiosSecure.put(`/apply/${_id}`, application).then((res) => {
+        console.log(res.data);
+          
+        });
+      }
+    });
+  };
   return (
     <div className="max-w-screen-2xl mx-auto px-5">
       <div>
         <Hero>
           <div className="flex justify-center gap-6 items-center text-left">
-          <img className="h-16 w-16" src={job_banner} alt="" />
-          {job_title}</div>
+            <img className="h-16 w-16" src={job_banner} alt="" />
+            {job_title}
+          </div>
         </Hero>
         <div>
           <div className="">
             <div className="grid grid-cols-12 gap-6 my-32">
-            <div className="col-span-12 lg:col-span-8">
+              <div className="col-span-12 lg:col-span-8">
                 <h3 className="text-4xl font-semibold mb-3">Job Description</h3>
                 <p>{job_description}</p>
               </div>
@@ -77,14 +113,15 @@ const JobDetails = () => {
                   </div>
                 </div>
                 <div>
-                  <Link to={`/job/${_id}`}>
-                    <Button color="secondary" variant="shadow">
-                      Apply Now
-                    </Button>
-                  </Link>
+                  <Button
+                    onClick={handleApply}
+                    color="secondary"
+                    variant="shadow"
+                  >
+                    Apply Now
+                  </Button>
                 </div>
               </div>
-              
             </div>
           </div>
         </div>

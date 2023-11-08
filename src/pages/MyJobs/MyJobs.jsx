@@ -27,6 +27,7 @@ const MyJobs = () => {
   } = useQuery({
     queryKey: ["my-jobs"],
     queryFn: fetchMyJobs,
+    enabled: !!user.email
   });
 
   const handleDelete = (id) => {
@@ -40,23 +41,15 @@ const MyJobs = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        refetch();
         axiosSecure.delete(`/jobs/${id}`).then((res) => {
           if (res.data.deletedCount > 0) {
+            refetch();
             toast.success("Product deleted");
           }
         });
       }
     });
   };
-
-  // useEffect(() => {
-  //   axiosSecure(`/my-jobs?email=${user.email}`).then((res) => {
-  //     setJobs(res.data);
-  //     console.log("rendering");
-  //     setLoading(false);
-  //   });
-  // }, []);
 
   return (
     <div>

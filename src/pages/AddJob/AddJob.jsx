@@ -29,7 +29,7 @@ const AddJob = () => {
       job_description: form.description.value,
       post_date: format(new Date(), "yyyy-MM-dd"),
       deadline: formattedStartDate,
-      applicants_number: form.applicants.value,
+      applicants_number: +form.applicants.value,
       email: user.email
     };
 

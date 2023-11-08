@@ -54,7 +54,7 @@ const UpdateJob = () => {
       job_description: form.description.value,
       post_date: post_date,
       deadline: formattedStartDate,
-      applicants_number: form.applicants.value,
+      applicants_number: +form.applicants.value,
       email: user.email,
     };
     console.log(updatedJob);
@@ -150,6 +150,7 @@ const UpdateJob = () => {
               className="bg-transparent focus:outline-none  border-slate-600 border-1 p-3 mt-3 rounded-lg"
               name="job_category"
               id="job_category"
+              defaultValue={job_category}
             >
               <option className="bg-slate-900 " value="On-site">
                 On-site

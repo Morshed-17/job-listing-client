@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 
 const AllJobCard = ({job}) => {
+  
     const {
         _id,
         job_banner,
@@ -16,6 +17,7 @@ const AllJobCard = ({job}) => {
         post_date,
         applicants_number,
       } = job || {};
+      
       
       return (
         
@@ -39,12 +41,10 @@ const AllJobCard = ({job}) => {
                 
               </div>
               <span className="text-slate-200 text-sm flex gap-1 items-center">
-                  <BsCalendar2/>
-                  {post_date? post_date : 'Toady'}
+                  Posted on: {post_date? post_date : 'No Date'}
                 </span>
               <span className="text-slate-200 text-sm flex gap-1 items-center">
-                  <BsCalendar2/>
-                  {deadline}
+                  Deadline: {deadline}
                 </span>
                 <div>
               <Link to={`/job/${_id}`}>
