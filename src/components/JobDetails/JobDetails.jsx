@@ -31,8 +31,9 @@ const JobDetails = () => {
   } = job || {};
 
   const handleApply = () => {
+    
     Swal.fire({
-      title: "Enter a URL",
+      title: "Your Resume Link",
       input: "url",
       inputPlaceholder: "Enter URL",
       showCancelButton: true,
@@ -50,9 +51,16 @@ const JobDetails = () => {
           job: job,
           resume: result.value,
         };
+        if(email === user.email){
+          return toast.error('You can not apply on your own job')
+        }
         axiosSecure
           .post(`/applied`, application)
-          .then((res) => console.log(res.data));
+          .then((res) => 
+          {console.log(res.data)
+          toast.success("Applied Successfully")
+        }
+          );
 
         axiosSecure.put(`/apply/${_id}`, application).then((res) => {
         console.log(res.data);
@@ -113,13 +121,25 @@ const JobDetails = () => {
                   </div>
                 </div>
                 <div>
-                  <Button
+                  {
+                    email === user.email?
+                    <Button
+                    disabled
+                    color="danger"
+                    variant="shadow"
+                  >
+                    Can't Apply
+                  </Button>
+                    :
+                    <Button
                     onClick={handleApply}
                     color="secondary"
                     variant="shadow"
                   >
                     Apply Now
                   </Button>
+                  }
+                  
                 </div>
               </div>
             </div>
