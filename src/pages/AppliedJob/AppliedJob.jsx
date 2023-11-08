@@ -1,9 +1,6 @@
-import { BsSearch } from "react-icons/bs";
-import { Button } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Hero from "../../components/Hero/Hero";
-import AllJobCard from "../../components/AllJobCard/AllJobCard";
 import Loading from "../../components/Loading/Loading";
 import UseAuth from "../../hooks/UseAuth";
 import AppliedJobCard from "../../components/AppliedJobCard/AppliedJobCard";

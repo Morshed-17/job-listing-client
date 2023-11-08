@@ -39,7 +39,7 @@ const CategoryTab = () => {
                 loading?
                 <Loading/>
                 :
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2  gap-6">
                 {jobs?.slice(0, 4).map((job) => (
                   <JobListingCard key={job._id} job={job}></JobListingCard>
                 ))}
