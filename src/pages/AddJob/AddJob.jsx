@@ -13,7 +13,9 @@ import toast from "react-hot-toast";
 
 const AddJob = () => {
   const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date())
   const formattedStartDate = format(startDate, "yyyy-MM-dd");
+  const formattedEndDate = format(endDate, "yyyy-MM-dd");
   const { user } = UseAuth();
   const axiosSecure = useAxiosSecure()
   const handleSubmit = (e) => {
@@ -27,8 +29,8 @@ const AddJob = () => {
       job_category: form.job_category.value,
       salary_range: `${form.salary_min.value}-${form.salary_max.value}`,
       job_description: form.description.value,
-      post_date: format(new Date(), "yyyy-MM-dd"),
-      deadline: formattedStartDate,
+      post_date: formattedStartDate,
+      deadline: formattedEndDate,
       applicants_number: +form.applicants.value,
       email: user.email
     };
@@ -161,7 +163,7 @@ const AddJob = () => {
             <DatePicker
               className="bg-transparent w-full focus:outline-none border-slate-600 border-1 p-3 mt-3  rounded-lg "
               selected={startDate}
-              disabled
+              
               onChange={(date) => setStartDate(date)}
             />
           </div>
@@ -177,8 +179,8 @@ const AddJob = () => {
               required
               name="deadline"
               className="bg-transparent w-full focus:outline-none border-slate-600 border-1 p-3 mt-3  rounded-lg "
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
+              selected={endDate}
+              onChange={(date) => setEndDate(date)}
             />
           </div>
           {/* col */}
