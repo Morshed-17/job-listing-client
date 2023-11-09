@@ -14,7 +14,7 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 import axios from "axios";
 const googleProvider = new GoogleAuthProvider();
 const auth = getAuth(app);
-export const AuthContext = createContext(null);
+export const AuthContext = createContext('');
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -48,7 +48,7 @@ const AuthProvider = ({ children }) => {
       setUser(user);
       if(user){
         const loggedUser = {email: user.email}
-        axios.post('http://localhost:5001/jwt',loggedUser, {withCredentials: true})
+        axios.post('https://job-listing-server-three.vercel.app/jwt',loggedUser, {withCredentials: true})
         .then(res => {
           console.log('token response', res.data);
         })

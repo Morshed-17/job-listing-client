@@ -11,7 +11,7 @@
 
 [
     {
-        "job_banner": "https://i.ibb.co/xm07XJ5/brand-1.png",
+        "job_banner": "https://images.unsplash.com/photo-1529400971008-f566de0e6dfc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8am9ifGVufDB8fDB8fHww",
         "job_title": "Senior Software Engineer",
         "author_name":"John Doe", 
         "job_category": "On-site",
@@ -21,7 +21,7 @@
         "applicants_number": 0
     },
     {
-        "job_banner": "https://i.ibb.co/pbf6JR0/brand-2.png",
+        "job_banner": "https://images.unsplash.com/photo-1598257006626-48b0c252070d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8am9ifGVufDB8fDB8fHww",
         "job_title": "Data Analyst",
         "author_name":"Jane Smith", 
         "job_category": "Remote",
@@ -31,7 +31,7 @@
         "applicants_number": 0
     },
     {
-        "job_banner": "https://i.ibb.co/Htfd6nj/brand-3.png",
+        "job_banner": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8am9ifGVufDB8fDB8fHww",
         "job_title": "Marketing Manager",
         "author_name":"Alice Johnson", 
         "job_category": "Part-time",
@@ -41,7 +41,7 @@
         "applicants_number": 0
     },
     {
-        "job_banner": "https://i.ibb.co/z2mSfLh/brand-4.png",
+        "job_banner": "https://images.unsplash.com/photo-1542626991-cbc4e32524cc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8am9ifGVufDB8fDB8fHww",
         "job_title": "Product Manager",
         "author_name":"Bob Williams", 
         "job_category": "Hybrid",
@@ -51,7 +51,7 @@
         "applicants_number": 0
     },
     {
-        "job_banner": "https://i.ibb.co/cTkfJnj/brand-5.png",
+        "job_banner": "https://images.unsplash.com/photo-1507206292181-8142bdfdc312?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTY4fHxqb2J8ZW58MHx8MHx8fDA%3D",
         "job_title": "UX Designer",
         "author_name":"Charlie Brown", 
         "job_category": "On-site",
@@ -61,7 +61,7 @@
         "applicants_number": 0
     },
     {
-        "job_banner": "https://i.ibb.co/CVL26Gm/brand-6.png",
+        "job_banner": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGpvYnxlbnwwfHwwfHx8MA%3D%3D",
         "job_title": "Front-end Developer",
         "author_name":"David Davis", 
         "job_category": "Remote",
@@ -71,7 +71,7 @@
         "applicants_number": 0
     },
     {
-        "job_banner": "https://i.ibb.co/BtGyLYS/brand-7.png",
+        "job_banner": "https://images.unsplash.com/photo-1628348068343-c6a848d2b6dd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGpvYnxlbnwwfHwwfHx8MA%3D%3D",
         "job_title": "HR Manager",
         "author_name":"Emma Thompson", 
         "job_category": "Part-time",
@@ -81,7 +81,7 @@
         "applicants_number": 0
     },
     {
-        "job_banner": "https://i.ibb.co/CVL26Gm/brand-6.png",
+        "job_banner": "https://images.unsplash.com/photo-1549923746-c502d488b3ea?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjN8fGpvYnxlbnwwfHwwfHx8MA%3D%3D",
         "job_title": "Project Manager",
         "author_name":"Frank Miller", 
         "job_category": "Hybrid",

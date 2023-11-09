@@ -89,6 +89,28 @@ const Blog = () => {
                 without frequent logins.
               </p>
             </div>
+            {/* third */}
+            <h3 className="py-6 text-2xl mt-6">
+              <span className="text-2xl">2.</span> Code explaination in this Project:
+            </h3>
+
+            <div className="p-4  rounded-lg shadow-lg">
+              <p className="text-lg font-semibold">Frontend.</p>
+              <p className="text-gray-400">
+              I have used ReactJs and tailwindcss for my frontend.
+              </p>
+              <p className="text-lg font-semibold">Backend:</p>
+              <p className="text-gray-400">
+              In the backend of this project. I implemented serveral crud opertaions and also used jwt for security.
+              For the database i have used mongoDb.
+              The most challenging task for me was the applied job page. 
+              Where the user can see thair updated job and it a is private endpoint.
+
+              </p>
+              <p className="text-gray-400">
+                
+              </p>
+            </div>
 
             <blockquote className="border-l-4 border-green-500 italic my-8 pl-8 md:pl-12">
               Example of blockquote - Lorem ipsum dolor sit amet, consectetur

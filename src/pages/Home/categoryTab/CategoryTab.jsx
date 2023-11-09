@@ -13,7 +13,7 @@ const CategoryTab = () => {
   const [loading, setLoading] = useState(true)
   const [jobs, setJobs] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:5001/jobs").then((res) => {
+    axios.get("https://job-listing-server-three.vercel.app/jobs").then((res) => {
       setJobs(res.data);
       console.log("rendering");
       setLoading(false)

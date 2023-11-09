@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Hero from "../../components/Hero/Hero";
 import AllJobCard from "../../components/AllJobCard/AllJobCard";
-import Loading from "../../components/Loading/Loading";
+import NoData from "../../components/NoData/NoData";
+
 
 const AllJobs = () => {
   const [jobs, setJobs] = useState([]);
@@ -14,7 +15,7 @@ const AllJobs = () => {
   // const {data, isLoading} = useQuery({
   //   queryKey: ['jobs'],
   //   queryFn: async () => {
-  //     const data =  await fetch('http://localhost:5001/jobs')
+  //     const data =  await fetch('https://job-listing-server-three.vercel.app/jobs')
   //     return await data.json()
   //   }
 
@@ -66,10 +67,19 @@ const AllJobs = () => {
             </Button>
           </form>
         </div>
+       
+
         {loading ? (
-          <Loading></Loading>
+          <loading/>
+          
         ) : (
-          <div className="grid grid-cols-1 gap-6">
+          
+          <>
+            {
+              jobs.length === 0?
+              <NoData/>
+              :
+              <div className="grid grid-cols-1 gap-6">
             {jobs
               ?.filter((job) =>
                 job.job_title.toLowerCase().includes(search.toLowerCase(search))
@@ -78,6 +88,8 @@ const AllJobs = () => {
                 <AllJobCard key={job._id} job={job} />
               ))}
           </div>
+            }
+          </>
         )}
       </div>
     </div>

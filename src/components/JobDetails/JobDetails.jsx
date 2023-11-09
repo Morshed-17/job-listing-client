@@ -1,6 +1,5 @@
 import { Button } from "@nextui-org/react";
-import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
@@ -16,12 +15,14 @@ const JobDetails = () => {
   const axiosSecure = useAxiosSecure();
   const param = useParams();
   const { user } = UseAuth();
-  const { loading, setLoaing } = useState(true);
+  const { loading, setLoading } = useState(true);
 
-  axiosSecure.get(`/job/${param.id}`).then((res) => {
-    setJob(res.data);
-    setLoaing(false);
-  });
+  useEffect(() => {
+    axiosSecure.get(`/job/${param.id}`).then((res) => {
+      setJob(res.data);
+      setLoading(false);
+    });
+  } , [])
   const {
     _id,
     job_banner,
@@ -60,8 +61,14 @@ const JobDetails = () => {
         if (email === user.email) {
           return toast.error("You can not apply on your own job");
         }
-        axiosSecure.post(`/applied`, application).then((res) => {
+        axiosSecure.post(`/applied/${_id}`, application).then((res) => {
           console.log(res.data);
+          if(res.data.message === 'Already applied'){
+            return toast.error('Aready applied for this job')
+          }
+          axiosSecure.put(`/apply/${_id}`, application).then((res) => {
+            console.log(res.data);
+          });
           toast.success("Applied Successfully an email will be sent");
           emailjs
             .send(
@@ -80,9 +87,7 @@ const JobDetails = () => {
             );
         });
 
-        axiosSecure.put(`/apply/${_id}`, application).then((res) => {
-          console.log(res.data);
-        });
+        
       }
     });
   };
@@ -91,22 +96,16 @@ const JobDetails = () => {
   }
 
   return (
-    <div className="max-w-screen-xl mx-auto px-5">
-      <div>
-        <Hero>
-          <div className="flex justify-center gap-6 items-center text-left">
-            <img className="h-16 w-16" src={job_banner} alt="" />
-            {job_title}
-          </div>
-        </Hero>
+    <div className="max-w-screen-xl mx-auto px-5 my-32">
+      <div className="grid lg:grid-cols-2 gap-6 ">
+        <div className="">
+          <img className="w-full h-ful rounded-lg" src={job_banner} alt="" />
+        </div>
         
         <div>
           <div className="">
-            <div className="grid grid-cols-12 gap-6 my-32">
-              <div className="col-span-12 lg:col-span-8">
-                <h3 className="text-4xl font-semibold mb-3">Job Description</h3>
-                <p>{job_description}</p>
-              </div>
+            <div className="">
+              
               <div className="col-span-12 lg:col-span-4 shadow-sm shadow-gray-100  flex flex-col sm:flex-row gap-3 sm:items-center  justify-between px-5 py-4 rounded-md">
                 <div>
                   <span className="text-purple-600 text-sm">{author_name}</span>
@@ -153,6 +152,10 @@ const JobDetails = () => {
                     </Button>
                   )}
                 </div>
+              </div>
+              <div className="col-span-12 lg:col-span-8 mt-6">
+                <h3 className="text-4xl font-semibold mb-3">Job Description</h3>
+                <p>{job_description}</p>
               </div>
             </div>
           </div>

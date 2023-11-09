@@ -4,6 +4,7 @@ import Hero from "../../components/Hero/Hero";
 import Loading from "../../components/Loading/Loading";
 import UseAuth from "../../hooks/UseAuth";
 import AppliedJobCard from "../../components/AppliedJobCard/AppliedJobCard";
+import NoData from "../../components/NoData/NoData";
 
 const AppliedJobs = () => {
   const [jobs, setJobs] = useState([]);
@@ -62,13 +63,23 @@ const AppliedJobs = () => {
           <Loading></Loading>
         ) : (
           <div className="grid grid-cols-1 gap-6">
+            
+              <>
+              {
+              jobs.length === 0?
+              <NoData/>
+              :
+              <div className="grid grid-cols-1 gap-6">
             {jobs
               ?.filter((job) =>
-                job.job.job_category.toLowerCase().includes(selectedValue.toLowerCase(selectedValue))
+                job.job_title.toLowerCase().includes(selectedValue.toLowerCase(selectedValue))
               )
               .map((job) => (
                 <AppliedJobCard key={job._id} job={job} />
               ))}
+          </div>
+            }
+              </>
           </div>
         )}
       </div>

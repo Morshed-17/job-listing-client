@@ -18,8 +18,9 @@ import { useParams } from "react-router-dom";
 
 const UpdateJob = () => {
   const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date)
   const formattedStartDate = format(startDate, "yyyy-MM-dd");
-
+  
   const { user } = UseAuth();
   const param = useParams();
   const [job, setJob] = useState({});
@@ -39,7 +40,7 @@ const UpdateJob = () => {
     post_date,
     applicants_number,
   } = job || {};
-  
+  const formattedEndDate = format(endDate, "yyyy-MM-dd");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -52,8 +53,7 @@ const UpdateJob = () => {
       job_category: form.job_category.value,
       salary_range: `${form.salary_min.value}-${form.salary_max.value}`,
       job_description: form.description.value,
-      post_date: post_date,
-      deadline: formattedStartDate,
+      deadline: formattedEndDate,
       applicants_number: +form.applicants.value,
       email: user.email,
     };
@@ -204,8 +204,9 @@ const UpdateJob = () => {
             <DatePicker
               className="bg-transparent w-full focus:outline-none border-slate-600 border-1 p-3 mt-3  rounded-lg "
               selected={startDate}
+              
               disabled
-              onChange={(date) => setStartDate(date)}
+             
             />
           </div>
         </div>
@@ -220,8 +221,9 @@ const UpdateJob = () => {
               required
               name="deadline"
               className="bg-transparent w-full focus:outline-none border-slate-600 border-1 p-3 mt-3  rounded-lg "
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
+              selected={endDate}
+              
+              onChange={(date) => setEndDate(date)}
             />
           </div>
           {/* col */}

@@ -9,6 +9,7 @@ import UseAuth from "../../hooks/UseAuth";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
+import NoData from "../../components/NoData/NoData";
 
 const MyJobs = () => {
   // const [jobs, setJobs] = useState([]);
@@ -43,9 +44,15 @@ const MyJobs = () => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/jobs/${id}`).then((res) => {
           if (res.data.deletedCount > 0) {
-            refetch();
+
             toast.success("Job deleted");
+            axiosSecure.delete(`/my-jobs/${id}`)
+            .then(res => {
+              refetch();
+              
+          })
           }
+          
         });
       }
     });
@@ -57,7 +64,7 @@ const MyJobs = () => {
       <div className="max-w-screen-xl mx-auto px-5 my-12">
         <div className="text-center">
           {jobs?.length === 0 ? (
-            <p>No data found</p>
+            <NoData/>
           ) : (
             <>
               {isLoading ? (
