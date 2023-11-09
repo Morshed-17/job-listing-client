@@ -67,16 +67,19 @@ const JobDetails = () => {
       }
     });
   };
+  
   return (
     <div className="max-w-screen-2xl mx-auto px-5">
       <div>
         <Hero>
           <div className="flex justify-center gap-6 items-center text-left">
             <img className="h-16 w-16" src={job_banner} alt="" />
-            {job_title}
+            {job_title? job_title : 'job has been deleted'}
           </div>
         </Hero>
-        <div>
+        {
+          job?
+          <div>
           <div className="">
             <div className="grid grid-cols-12 gap-6 my-32">
               <div className="col-span-12 lg:col-span-8">
@@ -140,6 +143,9 @@ const JobDetails = () => {
             </div>
           </div>
         </div>
+          :
+          <p className="text-3xl text-center my-32">Job has been deleted</p>
+        }
       </div>
     </div>
   );

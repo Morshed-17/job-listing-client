@@ -44,7 +44,7 @@ const MyJobs = () => {
         axiosSecure.delete(`/jobs/${id}`).then((res) => {
           if (res.data.deletedCount > 0) {
             refetch();
-            toast.success("Product deleted");
+            toast.success("Job deleted");
           }
         });
       }

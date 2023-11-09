@@ -23,7 +23,7 @@ const Login = () => {
     .then(res => {
       console.log(res);
       toast.success('Account Logged In successfuly')
-      navigate(state)
+      // navigate(state)
     })
     .catch(err => console.log(err))
   }
@@ -37,7 +37,7 @@ const Login = () => {
     .then(res => {
       console.log(res);
       toast.success('Account Logged In successfuly')
-      navigate(state)
+      // navigate(state)
     })
     .catch(err => {
       console.error(err)
