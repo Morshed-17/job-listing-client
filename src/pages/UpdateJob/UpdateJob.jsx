@@ -3,7 +3,7 @@ import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { format, parse } from "date-fns";
+import { format, parse, parseISO } from "date-fns";
 import AddJobLottie from "../../assets/lottie/addJob.json";
 import Lottie from "lottie-react";
 import "../../aos/aosSetup.js";
@@ -11,6 +11,7 @@ import UseAuth from "../../hooks/UseAuth.jsx";
 import useAxiosSecure from "../../hooks/useAxiosSecure.jsx";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 
 
 
@@ -20,13 +21,19 @@ const UpdateJob = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date)
   const formattedStartDate = format(startDate, "yyyy-MM-dd");
-  
+  const queryClient = useQueryClient();
+
   const { user } = UseAuth();
   const param = useParams();
   const [job, setJob] = useState({});
   const axiosSecure = useAxiosSecure();
   useEffect(() => {
-    axiosSecure.get(`/jobs/${param.id}`).then((res) => setJob(res.data));
+    axiosSecure.get(`/jobs/${param.id}`).then((res) => {
+       setStartDate(new Date(res.data.deadline))
+       setEndDate(new Date(res.data.post_date))
+              
+                
+      setJob(res.data)});
   }, []);
   const {
     _id,
@@ -40,7 +47,7 @@ const UpdateJob = () => {
     post_date,
     applicants_number,
   } = job || {};
-  const formattedEndDate = format(endDate, "yyyy-MM-dd");
+  const formattedEndDate = format(startDate, "yyyy-MM-dd");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -53,12 +60,12 @@ const UpdateJob = () => {
       job_category: form.job_category.value,
       salary_range: `${form.salary_min.value}-${form.salary_max.value}`,
       job_description: form.description.value,
-      deadline: formattedEndDate,
+      deadline: format(startDate, "yyyy-MM-dd"),
       applicants_number: +form.applicants.value,
+      post_date: format(endDate, "yyyy-MM-dd"),
       email: user.email,
     };
     console.log(updatedJob);
-    
 
     axiosSecure
       .put(`/jobs/${_id}`, updatedJob)
@@ -69,6 +76,8 @@ const UpdateJob = () => {
           toast.success('Job updated successfully')
           axiosSecure.get(`/jobs/${_id}`).then((res) => {
             setJob(res.data);
+            queryClient.invalidateQueries({ queryKey: ["my-jobs"] });
+
           });
 
         }
@@ -203,8 +212,8 @@ const UpdateJob = () => {
 
             <DatePicker
               className="bg-transparent w-full focus:outline-none border-slate-600 border-1 p-3 mt-3  rounded-lg "
-              selected={startDate}
-              
+      
+              selected={endDate}
               disabled
              
             />
@@ -221,9 +230,8 @@ const UpdateJob = () => {
               required
               name="deadline"
               className="bg-transparent w-full focus:outline-none border-slate-600 border-1 p-3 mt-3  rounded-lg "
-              selected={endDate}
-              
-              onChange={(date) => setEndDate(date)}
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
             />
           </div>
           {/* col */}
@@ -249,7 +257,7 @@ const UpdateJob = () => {
             required
             name="description"
             defaultValue={job_description}
-            className="bg-transparent focus:outline-none border-slate-600 border-1 p-3 mt-3  rounded-lg "
+            className="bg-transparent focus:outline-none border-slate-600 border-1  p-3 mt-3  rounded-lg "
             placeholder="Enter the job description here."
           />
         </div>
@@ -260,7 +268,7 @@ const UpdateJob = () => {
           color="secondary"
           type="submit"
         >
-          Add Now
+          Update Now
         </Button>
       </form>
 

@@ -15,6 +15,7 @@ const MyJobCard = ({ job, handleDelete }) => {
     post_date,
     applicants_number,
   } = job || {};
+  console.log(deadline);
 
   return (
     <div className="w-full">
@@ -33,7 +34,7 @@ const MyJobCard = ({ job, handleDelete }) => {
             <span className="font-bold text-white">Posted:</span> {post_date}
           </span>
           <span className="text-slate-200 text-sm flex gap-1 items-center">
-            <span className="font-bold text-white">Deadline:</span> {post_date}
+            <span className="font-bold text-white">Deadline:</span> {deadline}
           </span>
           <div className="flex gap-3">
             <Button size="sm" onClick={() => handleDelete(_id)} color="danger">

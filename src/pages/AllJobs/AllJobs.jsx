@@ -83,7 +83,7 @@ const AllJobs = () => {
               <div className="grid grid-cols-1 gap-6">
             {jobs
               ?.filter((job) =>
-                job.job_title.toLowerCase().includes(search.toLowerCase(search))
+                job.job_title?.toLowerCase().includes(search.toLowerCase(search))
               )
               .map((job) => (
                 <AllJobCard key={job._id} job={job} />

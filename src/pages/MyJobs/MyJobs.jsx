@@ -27,8 +27,11 @@ const MyJobs = () => {
     refetch,
   } = useQuery({
     queryKey: ["my-jobs"],
+  
     queryFn: fetchMyJobs,
-    enabled: !!user.email
+    enabled: !!user.email,
+
+  
   });
 
   const handleDelete = (id) => {
