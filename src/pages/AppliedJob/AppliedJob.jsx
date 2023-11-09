@@ -1,10 +1,12 @@
+import { BsSearch } from "react-icons/bs";
+import { Button } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Hero from "../../components/Hero/Hero";
+import AllJobCard from "../../components/AllJobCard/AllJobCard";
 import Loading from "../../components/Loading/Loading";
 import UseAuth from "../../hooks/UseAuth";
 import AppliedJobCard from "../../components/AppliedJobCard/AppliedJobCard";
-import NoData from "../../components/NoData/NoData";
 
 const AppliedJobs = () => {
   const [jobs, setJobs] = useState([]);
@@ -30,7 +32,7 @@ const AppliedJobs = () => {
   return (
     <div>
       <Hero>Applied Jobs</Hero>
-      <div className="max-w-screen-xl mx-auto px-5 my-12">
+      <div className="max-w-screen-2xl mx-auto px-5 my-12">
         <div className="text-right flex justify-center items-center gap-3 my-6">
           <div>
             <select
@@ -40,7 +42,7 @@ const AppliedJobs = () => {
               value={selectedValue} // Make sure to set the selected value to the state variable
               onChange={handleSelectChange} // Attach the onChange event handler
             >
-              <option className="bg-slate-900 " value="">
+              <option className="bg-slate-900 " value="On-site">
                 All
               </option>
               <option className="bg-slate-900 " value="On-site">
@@ -63,23 +65,13 @@ const AppliedJobs = () => {
           <Loading></Loading>
         ) : (
           <div className="grid grid-cols-1 gap-6">
-            
-              <>
-              {
-              jobs.length === 0?
-              <NoData/>
-              :
-              <div className="grid grid-cols-1 gap-6">
             {jobs
               ?.filter((job) =>
-                job.job_title.toLowerCase().includes(selectedValue.toLowerCase(selectedValue))
+                job.job.job_category.toLowerCase().includes(selectedValue.toLowerCase(selectedValue))
               )
               .map((job) => (
                 <AppliedJobCard key={job._id} job={job} />
               ))}
-          </div>
-            }
-              </>
           </div>
         )}
       </div>

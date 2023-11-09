@@ -5,6 +5,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Hero from "../../components/Hero/Hero";
 import AllJobCard from "../../components/AllJobCard/AllJobCard";
 import NoData from "../../components/NoData/NoData";
+import Loading from "../../components/Loading/Loading";
 
 
 const AllJobs = () => {
@@ -70,7 +71,7 @@ const AllJobs = () => {
        
 
         {loading ? (
-          <loading/>
+          <Loading/>
           
         ) : (
           
