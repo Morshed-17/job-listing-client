@@ -21,7 +21,7 @@ const CategoryTab = () => {
   }, []);
 
   return (
-    <div className="max-w-screen-2xl mx-auto px-5 my-12">
+    <div className="max-w-screen-xl mx-auto px-5 my-12">
       <div className="">
         <SectionTitle text={"Desire Jobs"}>Job You Will Love</SectionTitle>
         <div className="mt-6 mb-6">

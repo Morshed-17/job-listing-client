@@ -40,7 +40,7 @@ const AllJobs = () => {
   return (
     <div>
       <Hero>All Jobs</Hero>
-      <div className="max-w-screen-2xl mx-auto px-5 my-12">
+      <div className="max-w-screen-xl mx-auto px-5 my-12">
         <div className="text-center">
           <h3 className="text-xl font-semibold">Search Jobs</h3>
           <form

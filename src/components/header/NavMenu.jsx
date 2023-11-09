@@ -95,10 +95,11 @@ const NavMenu = () => {
   return (
     <Navbar
       isBordered
-      maxWidth="2xl"
+      maxWidth="xl"
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
       shouldHideOnScroll
+      className="bg-[#0B0C1B]"
     >
       <NavbarContent className="sm:hidden" justify="start">
         <NavbarMenuToggle

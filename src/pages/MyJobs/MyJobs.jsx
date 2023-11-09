@@ -54,7 +54,7 @@ const MyJobs = () => {
   return (
     <div>
       <Hero>My Posted Jobs</Hero>
-      <div className="max-w-screen-2xl mx-auto px-5 my-12">
+      <div className="max-w-screen-xl mx-auto px-5 my-12">
         <div className="text-center">
           {jobs?.length === 0 ? (
             <p>No data found</p>

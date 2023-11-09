@@ -12,7 +12,7 @@ const Search = () => {
           <input className="bg-transparent focus:outline-none p-2 w-full " placeholder="Search jobs" type="text" />
         </div>
         <div>
-        <Button size="lg" radius="none" className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg h-full">
+        <Button size="lg" radius="none" className="bg-gradient-to-tr from-blue-700 to-purple-500 text-white shadow-lg h-full">
         Search
          </Button>
         </div>

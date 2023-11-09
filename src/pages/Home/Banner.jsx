@@ -14,10 +14,10 @@ const Banner = () => {
         backgroundRepeat: "no-repeat", // Prevent the background from repeating
         
       }}
-      className=""
+      
     >
       <div className=" bg-slate-950 h-full bg-opacity-90 overflow-hidden">
-        <div className="flex items-center flex-col gap-6 lg:flex-row justify-between max-w-screen-2xl mx-auto py-32">
+        <div className="flex items-center flex-col gap-6 lg:flex-row justify-between max-w-screen-xl mx-auto py-32">
           <div className="max-w-2xl px-5 space-y-6 text-center lg:text-left " >
             <h2 className="text-6xl font-semibold " data-aos="fade-up" data-aos-duration="1000">
               Find Thousand <span className="text-blue-600">Job</span> If You’re

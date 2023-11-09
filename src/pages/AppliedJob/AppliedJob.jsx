@@ -29,7 +29,7 @@ const AppliedJobs = () => {
   return (
     <div>
       <Hero>Applied Jobs</Hero>
-      <div className="max-w-screen-2xl mx-auto px-5 my-12">
+      <div className="max-w-screen-xl mx-auto px-5 my-12">
         <div className="text-right flex justify-center items-center gap-3 my-6">
           <div>
             <select

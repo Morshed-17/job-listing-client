@@ -45,7 +45,7 @@ const AddJob = () => {
   };
 
   return (
-    <div className="max-w-screen-2xl px-5 mx-auto my-32 flex  flex-col lg:flex-row items-center gap-6">
+    <div className="max-w-screen-xl px-5 mx-auto my-32 flex  flex-col lg:flex-row items-center gap-6">
       <form
         onSubmit={handleSubmit}
         className="max-w-3xl   shadow-2xl rounded-lg border-1 bg-slate-900  bg-opacity-25 border-slate-700  shadow-slate-800 px-6 py-12 mx-auto"
