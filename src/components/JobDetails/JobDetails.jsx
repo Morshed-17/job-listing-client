@@ -6,7 +6,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Hero from "../Hero/Hero";
 import Swal from "sweetalert2";
-
+import emailjs from "@emailjs/browser";
 import UseAuth from "../../hooks/UseAuth";
 import toast from "react-hot-toast";
 import { format, parse } from "date-fns";
@@ -16,8 +16,12 @@ const JobDetails = () => {
   const axiosSecure = useAxiosSecure();
   const param = useParams();
   const { user } = UseAuth();
+  const { loading, setLoaing } = useState(true);
 
-  axiosSecure.get(`/job/${param.id}`).then((res) => setJob(res.data));
+  axiosSecure.get(`/job/${param.id}`).then((res) => {
+    setJob(res.data);
+    setLoaing(false);
+  });
   const {
     _id,
     job_banner,
@@ -31,7 +35,7 @@ const JobDetails = () => {
     post_date,
     email,
   } = job || {};
-  const date = new Date() > parse(deadline, "yyyy-MM-dd", new Date()) 
+  const date = new Date() > parse(deadline, "yyyy-MM-dd", new Date());
 
   const handleApply = () => {
     Swal.fire({
@@ -58,7 +62,22 @@ const JobDetails = () => {
         }
         axiosSecure.post(`/applied`, application).then((res) => {
           console.log(res.data);
-          toast.success("Applied Successfully");
+          toast.success("Applied Successfully an email will be sent");
+          emailjs
+            .send(
+              "service_ovagdol",
+              "template_0atw1s4",
+              application,
+              "wQEPtSdIAp6skYe9q"
+            )
+            .then(
+              (result) => {
+                console.log(result.text);
+              },
+              (error) => {
+                console.log(error.text);
+              }
+            );
         });
 
         axiosSecure.put(`/apply/${_id}`, application).then((res) => {
@@ -67,19 +86,21 @@ const JobDetails = () => {
       }
     });
   };
-  
+  if (loading) {
+    return <loading />;
+  }
+
   return (
     <div className="max-w-screen-xl mx-auto px-5">
       <div>
         <Hero>
           <div className="flex justify-center gap-6 items-center text-left">
             <img className="h-16 w-16" src={job_banner} alt="" />
-            {job_title? job_title : 'job has been deleted'}
+            {job_title}
           </div>
         </Hero>
-        {
-          job?
-          <div>
+        
+        <div>
           <div className="">
             <div className="grid grid-cols-12 gap-6 my-32">
               <div className="col-span-12 lg:col-span-8">
@@ -113,11 +134,7 @@ const JobDetails = () => {
                     <Button disabled color="danger" variant="shadow">
                       Can't Apply
                     </Button>
-                  ) : 
-                    date? 
-                    
-                  
-                  (
+                  ) : date ? (
                     <Button
                       disabled
                       onClick={handleApply}
@@ -126,9 +143,7 @@ const JobDetails = () => {
                     >
                       Date's over
                     </Button>
-                  )
-                  :
-                  (
+                  ) : (
                     <Button
                       onClick={handleApply}
                       color="secondary"
@@ -136,16 +151,13 @@ const JobDetails = () => {
                     >
                       Apply Now
                     </Button>
-                  )
-                  }
+                  )}
                 </div>
               </div>
             </div>
           </div>
         </div>
-          :
-          <p className="text-3xl text-center my-32">Job has been deleted</p>
-        }
+        
       </div>
     </div>
   );

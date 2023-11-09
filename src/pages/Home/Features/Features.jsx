@@ -1,26 +1,27 @@
 import React from "react";
-import { FiCreditCard, FiMail, FiUser, FiUsers } from "react-icons/fi";
+import { FiCalendar, FiCheck, FiCheckCircle, FiCreditCard, FiFile, FiMail, FiUser, FiUsers } from "react-icons/fi";
 import Card from "./Card";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import { BsSafe, BsSafeFill } from "react-icons/bs";
 const Features = () => {
   return (
-    <div>
+    <div className="bg-white dark:bg-gray-900 py-8">
       <div className="px-5 max-w-screen-xl mx-auto my-32">
         <SectionTitle text={'Features'}>Features of JobSensei</SectionTitle>
         <div className="grid gap-6 grid-cols-2 lg:grid-cols-4 mt-6">
           <Card
-            title="Account"
-            subtitle="Manage profile"
+            title="Thouseds of job"
+            subtitle="Endless opportunity"
             href="#"
-            Icon={FiUser}
+            Icon={FiFile}
           />
-          <Card title="Email" subtitle="Manage email" href="#" Icon={FiMail} />
-          <Card title="Team" subtitle="Manage team" href="#" Icon={FiUsers} />
+          <Card title="Active" subtitle="Active employers" Icon={FiCalendar} />
+          <Card title="Job Post" subtitle="Effortless job posting"  Icon={FiCheckCircle} />
           <Card
-            title="Billing"
-            subtitle="Manage cards"
+            title="Safe info"
+            subtitle="All the postings are verified"
             href="#"
-            Icon={FiCreditCard}
+            Icon={BsSafe}
           />
         </div>
       </div>
